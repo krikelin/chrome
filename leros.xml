@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book xml:id="simple_book" xmlns="http://docbook.org/ns/docbook" version="5.0">
+	<title>Leros</title>
+	<chapter xml:id="introduction">
+		<title>Leros</title>
+		<para>Leros is a MVC based HTML5 bootstrap. It uses only one static page, and servers the child pages using HashTags as apps</para>
+	</chapter>
+	<chapter xml:id="prerequistes">
+		<title>Prerequistes</title>
+		<para>The leros framework needs some prerequisted. First of all, it must be run on a web server like WAMP in order to work completely as it work heavy on Ajax</para>
+		<sect1>
+			<title>File structure</title>
+			<para>Then you need to download a leros bootstrap, which is a zip file containing the armature of a Leros framework site. It contains these files and directories:</para>
+			<table frame="all">
+				<title>Files and directories</title>
+				<tgroup cols="5">
+					<colspec colname="column1">
+					<colspec colname="column2">
+					<colspec colname="column3">
+				
+					<spanspec namest="column1" nameend="column2" spanname="span-horiz" align="center">
+					<spanspec namest="column2" nameend="column3" spanname="span-horiz-vert" align="center">
+					<thead>
+						<row>
+							
+							<entry>Type</entry>
+							<entry>File</entry>
+							<entry>Description</entry>
+						</row>
+					</thead>
+					
+					<tbody>
+						<row>
+							<entry>Directory</entry>
+							<entry>apps</entry>
+							<entry>Contains the apps in the site, eg. the components that represents various features of the site.</entry>
+							
+						</row>
+						<row>
+							<entry>Directory</entry>
+							<entry>assets</entry>
+							<entry>Contains the static assets related to the site, divided in subfolder for each types. Valid assets are img (images)</entry>
+						
+						</row>
+						
+						<row>
+							<entry>Directory</entry>
+							<entry>backend</entry>
+							<entry>Contains server-side files that proccess the backend tasks and is written in a API format that are understanded by various part of leros.</entry>
+						</row>
+						<row>
+							<entry>Directory</entry>
+							<entry>bungalows</entry>
+							<entry>Contains external apps (iframe canvas apps) made by external developers, so called Bungalows, which can enhance the site. </entry>
+						</row>
+						<row>
+							<entry>Directory</entry>
+							<entry>backend</entry>
+							<entry>Contains server-side files that proccess the backend tasks and is written in a API format that are understanded by various part of leros.</entry>
+						</row>
+						
+					</tbody>
+				</tgroup>
+			</table>
+		</sect1>
+	</chapter>
+	<chapter xml:id="basics">
+		<title>Basics</title>
+		<sect1>
+			<title>The chrome page (Index.html</title>
+			<para>The index.html, aka. chrome page, is the page that shells the site. It should contains these things:</para>
+			<example>
+				<title>index.html</title>
+				<programlisting language="html"><![CDATA[<!doctype html>
+<html>
+	<head>
+		<script src="js/leros.js" type="text/JavaScript"></script>
+		<link rel="stylesheet" href="css/style.css" type="text/css" />
+	</head>
+	<body>
+		<header>
+			<div id="search">
+				<input type="search" class="input" />
+			</div>
+		</header>
+		<nav >
+			<ul id="tree">
+				<a href="#!/home">Home</a>
+				<a href="#!/blog">Blog</a>
+				<a href="#!/portfolio">Portfolio</a>
+			</ul>
+		</nav>
+		<div id="content">
+		test
+		</div>
+		<footer>
+		</footer>
+	</body>
+</html>]]></programlisting>
+				<para>There is no php code allowed in this page</para>
+			</example>
+			<sect2>
+				<title>Hashlinks</titlE>
+				<para>All pages and sections in a Leros bootstrap app is located in hashlinks, and uses the onhashchanged html api.</para>
+			</sect2>
+		</sect1>
+		<sect1>
+			<title>Apps</title>
+			<para>All sections is apps in Leros. An app consists of a controller, that presents a page (aka. view). The view is loaded by the controller's ajax.</para>
+			<sect2>
+				<title>app.js (The controller)</title>
+				<para>The app.js is the controller for the app that controls the output. It loads the required widgets and fills it out with data from a data source.</para>
+				<example>
+					<title>A simple controller</title>
+					<programlisting language="javascript"><![CDATA[/** A sample app
+**/
+function App() {
+	this.title = "Gallery";
+	var node = document.createElement("div");
+	this.node = node;
+
+	xmlHttp.open("GET", "apps/myapp/index.html?c=" +  Math.random(), true);
+	xmlHttp.send(null);
+}]]>
+					</programlisting>
+					<note>This controller set up the page when accessing. the node is a important thing, the shell (Leros) will load the html dynamically and then apply the dynamic data on it.</description>
+				</example>
+			</sect2>
+			<sect2>
+				<title>More advanced controller</title>
+				<para>This was a simple, static controller. Most page contains dynamic data, and uses html stuff. In Leros framework, we endorse you to not use a php view, where the data is merged statically through php tags, as Leros framework intent is to separate data from the html page, which means that you instead should use widgets and datasource to populate list, details and forms.</para>
+				<example>
+					<title>A simple widget</title>
+					<note>In this example, we make use of the models module and insert a simple form.</description>
+					<programlisting language="html"><![CDATA[
+						<div id="form"></div>
+					]]></programlisting>
+					<note>The app.js controller</note>
+					<programlisting language="javascript"><![CDATA[...
+					var leros = new Leros(); // initialise leros
+					leros.require("js/views", function(views) {
+						var form = new views.Form({
+							title:"Contact",
+							name:"contact",
+							action:"contact.php",
+							sets:[
+								{
+									"legend":"Contact",
+									fields:[
+										{
+											"name":"name",
+											"title":"Your name",
+											"type":6
+										},
+										{
+											name:"email",
+											title:"Email",
+											required: true,
+											placeholder: "drsounds@gmail.com",
+											type:6
+										},
+										{
+											title:"Message",
+											name:"text",
+											required:true,
+											placeholder:"Your message",
+											type:6
+										}
+									]
+								}
+							]
+						});
+						document.getElementById("form").appendChild(form.node); // Append the form
+					});]]>
+					</programlisting>
+					<note>We will talke more about widgets later</note>
+				</example>
+			</sect2>
+			
+		</sect1>
+	</chapter>
+</book>	

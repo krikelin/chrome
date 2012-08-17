@@ -1,0 +1,32 @@
+/*@screen and (min-width: 800px) {
+	.section 
+}
+@screen and (max-width: 800px) {*/	body {
+		background: #eeeeee;
+
+		margin: 0px;
+	}
+	header {
+		height: 40px;
+		background: -webkit-linear-gradient(-90deg, #111111, #000000);
+	}
+	#content {
+		padding:20px;
+	}
+	section tr td {
+		border-bottom: 1px solid #888888;
+	}
+	section tr:last-child td {
+		border: none;
+	}
+	section {
+		background: #FFFFFF;
+		width: 100%;
+		box-shadow:0px 3px 5px #888888;
+		border-radius: 4px;
+		padding: 21px;
+		box-sizing: border-box;
+	}
+	section * {
+	}
+/*}*/
