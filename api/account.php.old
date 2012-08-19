@@ -1,0 +1,29 @@
+<?php
+include("conn.php");
+header("content-type:application/json");
+$NTH = $pdo->query('SELECT TOP 1 *, transactions.id AS id, transactions.comments AS comments, (SELECT sum(amount) FROM chromes WHERE chromes.type = 1) AS armani, (SELECT sum(amount) FROM chromes WHERE chromes.type > 1) AS amount FROM transactions WHERE user_id = '.$user_id.' AND NOT geoholium  ORDER BY time DESC');  
+
+$STH = $pdo->query('SELECT *, transactions.id AS id, transactions.comments AS comments, (SELECT sum(amount) FROM chromes WHERE chromes.type = 1 AND chromes.transaction_id = transactions.id) AS armani, (SELECT sum(amount) FROM chromes WHERE chromes.type > 1 AND chromes.transaction_id = transactions.id) AS amount FROM transactions WHERE user_id = '.$user_id.' AND NOT geoholium  ORDER BY time DESC');  
+  
+# setting the fetch mode  
+$STH->setFetchMode(PDO::FETCH_ASSOC);  
+$transactions = Array();
+while($row = $NTH->fetch()) {  
+	$transactions[] = "{ \"id\": ".$row["id"].", \"time\":\"".date("y-m-d")."\", \"armani\":".$row["armani"].", \"comments\":\"Balance\", \"amount\" : ".$row["amount"]."}";
+}
+while($row = $STH->fetch()) {  
+	if(!is_numeric($row["amount"])) {
+		$row["amount"] = 0;
+	}
+	if(!is_numeric($row["armani"])) {
+		$row["armani"] = 0;
+	}
+	$transactions[] = "{ \"id\": ".$row["id"].", \"time\":\"".date("y-m-d", strtotime($row["time"]))."\", \"armani\":".$row["armani"].", \"comments\":\"".$row["comments"]."\", \"amount\" : ".$row["amount"]."}";
+}
+
+?>{
+	"balance":"",
+	"transactions":[
+		<?php print(implode(",", $transactions)); ?>
+	]
+}

@@ -1,6 +1,11 @@
 /**
 @module views
 **/
+exports.Track = function(track, options) {
+	this.node = document.createElement("a");
+	a.setAttribute("href", "#");
+	
+};
 /**
 @class ListView
 **/
@@ -19,7 +24,8 @@ exports.ListView = function(dataSource, options) {
 		
 		var td = document.createElement("td");
 		td.appendChild(header);
-		header.appendChild(tr);
+		tr.appendChild(td);
+		
 	}
 	var tbody = document.createElement("tbody");
 	for(var i = 0; i < dataSource.count(); i++) {

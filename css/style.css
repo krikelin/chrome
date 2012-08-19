@@ -1,7 +1,108 @@
-/*@screen and (min-width: 800px) {
-	.section 
+@media screen and (min-width: 800px) {
+	header {
+		z-index:12;
+		left:0px;
+		width: 100%;
+		top: 0px;
+		height: 40px;
+		background: -webkit-linear-gradient(-90deg, #111111, #000000);
+		position: fixed;
+	}
+	a{
+		text-decoration: none; 
+	}
+	a:hover {
+		text-decoration: underline;
+		color: #7ABB00;
+		background: #EEFFEE;
+	}
+	a {
+		color: #0077ff;
+	}
+	section, nav {
+		background: #FFFFFF;
+		width: 100%;
+		box-shadow:0px 1px 2px #cccccc;
+		border-radius: 4px;
+		padding: 21px;
+		box-sizing: border-box;
+		top:60px;
+		position: absolute;
+	}
+	.app {
+		position: absolute;
+		left: 120px;
+		top: 40px;
+	}
+	.content {
+		left: 320px;
+		width: 820px;
+		position: absolute;
+	}
+	nav {
+		position: fixed;
+		left: 30px;
+		width:220px;
+		top: 60px;
+	}
+	body {	
+		-webkit-user-select: none;
+		margin: 0px;
+		
+	
+		background: url("../assets/img/pattern.png");
+		color: #444444;
+	}
+	/*section tr:nth-child(2n) td {
+		background-color: #EEEEEE;
+	}*/
+	section thead td {
+		color: #0077ff;
+		border-bottom: 1px solid #77aaff;
+	}
+	section tr td {
+		border-bottom: 1px solid #dddddd;
+	}
+	#account tbody tr:first-child td {
+		font-weight: bold;
+	}
+	section tr:last-child td {
+		border: none;
+	}
+.chrome:after {
+		content: " \2194";
+	}
+	.chrome:before {
+		content: " \20B5";
+	}
+	.chrome_expenditure:before {
+		content: " \2190 \20B5";
+	}
+	.chrome_income:before {
+		content: " \2192 \20B5";
+	}
+	.karma_expenditure:after {
+		content: " \2192";
+	}
+	.karma_income:after {
+		content: " \2190";
+	}
 }
-@screen and (max-width: 800px) {*/	body {
+@media screen and (max-width: 800px) {
+	a{
+		text-decoration: none; 
+	}
+	
+	a:hover {
+		text-decoration: underline;
+		color: #7ABB00;
+		background: #EEFFEE;
+	}
+	a {
+		color: #0077ff;
+	}
+	body {
+		font-family: "Helvetica";
 		background: #eeeeee;
 
 		margin: 0px;
@@ -13,8 +114,29 @@
 	#content {
 		padding:20px;
 	}
+	.chrome:after {
+		content: " \2194";
+	}
+	.chrome:before {
+		content: " \20B5";
+	}
+	.chrome_expenditure:before {
+		content: " \2190 \20B5";
+	}
+	.chrome_income:before {
+		content: " \2192 \20B5";
+	}
+	.karma_expenditure:after {
+		content: " \2192";
+	}
+	.karma_income:after {
+		content: " \2190";
+	}
 	section tr td {
-		border-bottom: 1px solid #888888;
+		border-bottom: 1px solid #dddddd;
+	}
+	section tbody tr:first-child td {
+		font-weight: bold;
 	}
 	section tr:last-child td {
 		border: none;

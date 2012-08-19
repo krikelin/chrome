@@ -17,6 +17,12 @@ exports.EVENT = {
 	SUCCESS: 0x1,
 	FAILED: 0x2
 };
+exports.Player = function() {
+
+};
+exports.Track = function (stream_url, title, artist, album) {
+		
+};
 /**
 @class DataSet
 @description Provides the shell DataSource for the given entity

@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Bounce</title>
+		<script type="text/JavaScript">
+			function init() {
+				var url = self.location.href;
+				var oauth_token = url.split("?")[1].split("=")[1];
+				console.log(oauth_token);
+				self.location = "#!/oauth_token";
+			}
+		</script>
+	</head>
+	<body onload="init()">
+	</body>
+</html>
+		
